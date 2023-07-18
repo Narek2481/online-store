@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import { fetchOneDevice } from '../http/deviceAPI';
 
 const DevicePage = () => {
-    const device = { id: 1, name: "12 pro max ", price: 250000, img: "http://www.w3.org/2000/svg" };
-    const description = [
-        { id: 1, title: "RAM", description: "5GB" },
-        { id: 2, title: "Camera", description: "12 mp" },
-        { id: 3, title: "Procesor", description: "Pentyum 3" },
-        { id: 4, title: "Number of nuclei", description: "4" },
-        { id: 5, title: "Battery", description: "4000" },
-    ]
+    const [device, setDevice] = useState({ info: [] })
+    const { id } = useParams()
+    useEffect(() => {
+        fetchOneDevice(id)
+            .then(data => setDevice(data))
+    }, [])
     return (
         <Container >
             <Row>
                 <Col md={4}>
-                    <Image width={300} height={300} src={device.img} />
+                    <Image width={300} height={300} src={process.env.REACT_APP_API_URL+device.img} />
                 </Col>
                 <Col md={4}>
                     <h2>{device.name}</h2>
@@ -32,7 +32,7 @@ const DevicePage = () => {
             <Row className='d-flex flex-column m-3'>
                 <h1>Specifications</h1>
                 {
-                    description.map((info, index) => {
+                    device.info.map((info, index) => {
                         return (
                             <Row
                                 key={info.id}
