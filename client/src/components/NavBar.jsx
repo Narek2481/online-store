@@ -11,10 +11,10 @@ import Container from "react-bootstrap/Container";
 const NavBar = observer(() => {
     const { user } = useContext(Context);
     const navigate = useNavigate();
-    
+
     const logOut = () => {
-        user.setUser({})
-        user.setIsAuth(false)
+        user.setUser({});
+        user.setIsAuth(false);
     }
 
     return (

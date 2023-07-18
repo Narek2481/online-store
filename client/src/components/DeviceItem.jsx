@@ -11,7 +11,7 @@ const DeviceItem = ({device}) => {
                 <Image 
                 width={150}
                 height={150}
-                src={device.img}
+                src={process.env.REACT_APP_API_URL+device.img}
                 />
                 <div className="text-black-50 me-1 d-flex justify-content-center align-items-center">
                     <div className="">sumsung...</div>
